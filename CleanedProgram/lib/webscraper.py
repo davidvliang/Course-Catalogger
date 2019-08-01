@@ -2,10 +2,6 @@ from requests import get
 from bs4 import BeautifulSoup as soup
 import re
 
-
-
-
-
 """
 function GetRoom
 * retrieve room information from url

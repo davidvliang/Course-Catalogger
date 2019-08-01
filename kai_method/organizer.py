@@ -1,6 +1,8 @@
 from requests import get
 from bs4 import BeautifulSoup as soup
 import re
+import pandas as pd
+import numpy as np
 
 import csv
 
@@ -25,7 +27,9 @@ SubjectURLs = list(dict.fromkeys(SubjectURLs))
 SubjectTLAs = []
 for Link in SubjectURLs:
     SubjectTLAs.append(Link.partition('&s=')[2])
-# print("debug SubjectTLAs", len(SubjectTLAs))
+
+# for count in range(len(SubjectURLs)):
+#   print("debug SubjectTLAs: {} {}".format(count, SubjectTLAs[count]))
 
 
 """
@@ -108,19 +112,48 @@ def GetDay( SubjectURL ):
 # print(len(Days))
 #
 
-# print("DEBUG TIME!!")
-# count = 1
-# n = 151
-# print("fetching URL from ", SubjectTLAs[n])
-# for r,t,d in zip(GetRoom(SubjectURLs[n]),GetTime(SubjectURLs[n]), GetDay(SubjectURLs[n])):
-#   print(count, end='\t')
-#   print(r + '\t\t' + t + '\t\t' + d)
-#   count+= 1
+print("DEBUG TIME!!")
+count = 0
+n = 75
+Rooms = []
+Time = []
+Day = []
+print("fetching URL from ", SubjectTLAs[n])
+for r,t,d in zip(GetRoom(SubjectURLs[n]),GetTime(SubjectURLs[n]), GetDay(SubjectURLs[n])):
+    # print(count, end='\t')
+    # print(r + '\t\t' + t + '\t\t' + d)
+    # count+= 1
+    Rooms.append(r)
+    Time.append(t)
+    Day.append(d)
 
+clean = pd.DataFrame(np.column_stack([Rooms, Time, Day]), columns=['Room', 'Time', 'Day'])
 
+# print(clean)
+
+# roomcount = clean['Room'].value_counts
+roomcount = clean.Room.value_counts()
+print(roomcount)
 '''
-function ClassroomInfo
+function Occurances
 * Given Classroom, determine time and days open
-@parms: str RoomName
+@parms: 
 @return: 
 '''
+# def OccurCounter(SubjectURLs):
+#     count_arr = {}
+#     for d in data_field:
+#       if d in count_arr:
+#         # print("inside", d)
+#         count_arr[d] += 1
+#       else:
+#         # print("make new", d)
+#         count_arr[d] = 1
+#
+#     return count_arr
+
+
+
+# for it in range(len(SubjectURLs)):
+#   for r, t, d in GetRoom(SubjectURLs[it]),GetTime(SubjectURLs[it]), GetDay(SubjectURLs[it]):
+#
