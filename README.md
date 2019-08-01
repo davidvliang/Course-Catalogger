@@ -16,16 +16,17 @@ Main line of effort.
     > cd [DIRECTORY]
     > python3 .\organizer.py
 ```
-========================================================================================================
+================================================================================
 
-#### Pages
+
+## Pages
 - [Main Page](https://www.sis.hawaii.edu/uhdad/avail.classes?i=MAN&t=202010)
 - [EE Page](https://www.sis.hawaii.edu/uhdad/avail.classes?i=MAN&t=202010&s=EE)
 
 
 
 
-## Thoughts
+#### Thoughts
  - Create a Search box that allows you to search courses based on keywords in any field
  - Create Filter options to narrow down search results based on field
  - Create GUI to see which classes are open at which times (I'm thinking like outlook scheduling assistant format)
@@ -50,7 +51,7 @@ Main line of effort.
 - Room
 - Dates
 
-## mainpage.ipynb
+#### mainpage.ipynb
 First attempt. 
 
 Created in Jupyter Notebook and follows this [tutorial by Data Science Dojo](https://www.youtube.com/watch?v=XQgXKtPSzUI)
