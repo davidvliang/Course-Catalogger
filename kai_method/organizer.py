@@ -112,28 +112,65 @@ def GetDay( SubjectURL ):
 # print(len(Days))
 #
 
+# print("DEBUG TIME!!")
+# count = 0
+# n = 47
+# Rooms = []
+# Time = []
+# Day = []
+# print("fetching URL from ", SubjectTLAs[n])
+# for r,d,t in zip(GetRoom(SubjectURLs[n]),GetDay(SubjectURLs[n]), GetTime(SubjectURLs[n])):
+#
+#     # parse Days
+#     if (len(d) > 1):
+#       for c in d:
+#         Rooms.append(r)
+#         Day.append(c)
+#         Time.append(t)
+#     else:
+#       Rooms.append(r)
+#       Day.append(d)
+#       Time.append(t)
+#
+#
+# clean = pd.DataFrame(np.column_stack([Rooms, Day, Time]), columns=['[Room]', '[Day]', '[Time]'])
+#
+# print(clean)
+
+# roomcount = clean['Days'].value_counts # prints the counts of rooms
+# roomcount = clean.Room.value_counts()
+# print(roomcount)
+#
+
+
 print("DEBUG TIME!!")
-count = 0
-n = 75
 Rooms = []
 Time = []
 Day = []
-print("fetching URL from ", SubjectTLAs[n])
-for r,t,d in zip(GetRoom(SubjectURLs[n]),GetTime(SubjectURLs[n]), GetDay(SubjectURLs[n])):
-    # print(count, end='\t')
-    # print(r + '\t\t' + t + '\t\t' + d)
-    # count+= 1
-    Rooms.append(r)
-    Time.append(t)
-    Day.append(d)
+print("fetching URL from somewhere")
+for i,s in enumerate(SubjectTLAs):
+  print("GRABBING FROM CLASS #",i,s)
+  for r,d,t in zip(GetRoom(SubjectURLs[i]),GetDay(SubjectURLs[i]), GetTime(SubjectURLs[i])):
 
-clean = pd.DataFrame(np.column_stack([Rooms, Time, Day]), columns=['Room', 'Time', 'Day'])
+      # parse Days
+      if (len(d) > 1):
+        for c in d:
+          Rooms.append(r)
+          Day.append(c)
+          Time.append(t)
+      else:
+        Rooms.append(r)
+        Day.append(d)
+        Time.append(t)
 
-# print(clean)
 
-# roomcount = clean['Room'].value_counts
-roomcount = clean.Room.value_counts()
-print(roomcount)
+allClasses = pd.DataFrame(np.column_stack([Rooms, Day, Time]), columns=['[Room]', '[Day]', '[Time]'])
+
+print(allClasses)
+
+with pd.ExcelWriter('results/classes.xlsx') as writer:
+  allClasses.to_excel(writer, sheet_name='BIGDATA')
+
 '''
 function Occurances
 * Given Classroom, determine time and days open

@@ -1,4 +1,5 @@
 # Course-Catalogger
+only look at kai method
 
 ## Purpose 
 Create a program that displays course information with much more dynamic features and utilities.
